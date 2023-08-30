@@ -1,5 +1,6 @@
 ﻿# Import Modules
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import qrcode
 import random
 from pydantic import BaseModel
@@ -19,6 +20,11 @@ import json
 app = FastAPI()
 load_dotenv()
 
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+)
 
 
 # Delete the image from the cloud
