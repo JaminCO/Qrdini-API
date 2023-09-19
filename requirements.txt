@@ -7,7 +7,7 @@ colorama==0.4.6
 dnspython
 email-validator
 exceptiongroup
-fastapi
+fastapi==0.101.1
 h11
 httpcore
 httptools
@@ -17,10 +17,10 @@ itsdangerous
 Jinja2
 MarkupSafe
 orjson
-pydantic
-pydantic-extra-types
-pydantic-settings
-pydantic_core
+pydantic==2.1.1
+pydantic-extra-types==2.0.0
+pydantic-settings==2.0.3
+pydantic_core==2.4.0
 pymongo
 pypng
 PyQRCode
