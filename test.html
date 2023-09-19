@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Request Form</title>
+</head>
+<body>
+    <h1>Submit Information to API</h1>
+    <form id="apiForm">
+        <label for="inputData">Enter Information:</label>
+        <input type="text" id="inputData" name="inputData">
+        <button type="button" onclick="submitData()">Submit</button>
+    </form>
+
+    <h2>API Response:</h2>
+    <pre id="response"></pre>
+
+    <script>
+        function submitData() {
+            const inputData = document.getElementById('inputData').value;
+            const url = 'http://127.0.0.1:8080/generate?data='+inputData;
+            console.log(inputData)
+
+            fetch(url, {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                document.getElementById('response').textContent = 'Error: ' + error.message;
+            });
+        }
+    </script>
+</body>
+</html>
+

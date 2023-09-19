@@ -20,11 +20,19 @@ import json
 app = FastAPI()
 load_dotenv()
 
-origins = ["*"]
+
+origins = [
+"*"
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
 
 
 # Delete the image from the cloud
@@ -42,7 +50,7 @@ def delete_file(file_url):
 
 # Store in cloud and get link
 def upload_file(filename):
-    url = "https://api.uploadfly.cloud/upload"
+    url = "https://api.uploadfly.cloud/upload/"
 
     headers = {
       'Authorization':  os.getenv("API_KEY_UPLOAD"),
@@ -52,6 +60,8 @@ def upload_file(filename):
     }
     r = requests.post(url, headers=headers, files=body)
     return r
+
+app = FastAPI()
 
 @app.get("/")
 async def home():
@@ -65,7 +75,7 @@ def gen_name():
 # Create a Pydantic model
 class Qrcode(BaseModel):
     # name: str
-    data: str = "QRCODE MESSAGE"
+    data : str 
 
 
 class DELCODE(BaseModel):
@@ -97,9 +107,11 @@ def create(name, data):
     img.save(image_name + '.png')
 
 # Get message/url and generate code
-@app.post("/generate/")
-async def generate(qrcode: Qrcode):
-    msg = qrcode.data
+@app.get("/generate")
+async def generate(data: str = "TESTING QRCODE GENERATION"):
+    msg = data
+    print(msg)
+    print(type(msg))
     name = gen_name()
     create(name, msg)
     res = upload_file(name+".png")
@@ -113,7 +125,7 @@ async def generate(qrcode: Qrcode):
 
     return res.json()
 
-@app.delete("/delete/")
+@app.delete("/delete")
 async def delete(delcode: DELCODE):
     res = delete_file(delcode.file_url)
     return res.json()
