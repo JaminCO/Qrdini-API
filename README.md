@@ -1,67 +1,93 @@
-
-# JQuickR
-
-A brief description of your API.
+# JQuickR API
+QR Code Generation API.
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [Usage](#usage)
-   - [Authentication](#authentication)
-   - [Endpoints](#endpoints)
-   - [Examples](#examples)
-4. [Responses](#responses)
-5. [Errors](#errors)
-6. [Contributing](#contributing)
-7. [License](#license)
+- [JQuickR API](#jquickr-api)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Features](#features)
+  - [Usage](#usage)
+    - [Authentication](#authentication)
+    - [Endpoints](#endpoints)
+    - [Examples](#examples)
+  - [Responses](#responses)
+    - [Response Format](#response-format)
+    - [Example Response](#example-response)
+  - [Errors](#errors)
+    - [Error Format](#error-format)
+    - [Example Error](#example-error)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Creator](#creator)
 
 ## Introduction
 
-Provide a high-level introduction to your API. Explain its purpose, what problems it solves, and who the target audience is.
+JQuickR QR Code Generation API is a versatile solution tailored for the swift and effortless creation of QR codes. 
 
-## Installation
+This API features a user-centric endpoint through which consumers can effortlessly produce QR codes. Users provide their desired message via query parameters, and the API generates a QR code image, securely storing it on a cloud service provider. 
 
-Provide instructions on how to install and set up your API locally, including any dependencies that need to be installed.
+Subsequently, it delivers a URL enabling users to access and disseminate the generated QR code image.
 
-```bash
-pip install -r requirements.txt
-```
+## Features
+
+1. `Message Input`: Users can effortlessly specify the message they wish to embed in the QR code using query parameters.
+
+2. `QR Code Generation` : The API dynamically crafts QR code images based on the user-provided messages.
+
+3. `Cloud Storage` : All generated QR code images are securely preserved on a reliable cloud service provider, ensuring data integrity and accessibility.
+
+4. `URL Provision` : The API returns a URL or location, simplifying user access to and distribution of the created QR code images.
 
 ## Usage
 
-Explain how to use your API, including authentication if required.
+How to use API, Including Authentication(if any), How to call the endpoints and also examples
 
 ### Authentication
 
-If your API requires authentication, explain the process here. You may need to provide API keys, tokens, or other credentials.
+*NO AUTHENTICATION*
 
 ### Endpoints
 
-List and describe the available endpoints of your API, including their input parameters and expected output.
+Available endpoints in the API, including their input parameters and expected output.
 
-- `/endpoint1`: Description of what this endpoint does.
-- `/endpoint2`: Description of what this endpoint does.
+- GET `/generate?data=<message>`: Generates Qrcode and returns a json containing url to the image
+
+- DELETE `/delete`: Delete Qrcode, after passing the url o the image in the request body, it returns a response on the status
 
 ### Examples
 
 Provide usage examples for your API, including code snippets.
 
-```python
-# Example 1: How to use endpoint1
-# ...
+1.  **Endpoint:** GET `/generate?data=<message>`
 
-# Example 2: How to use endpoint2
-# ...
+```BASH
+curl -X 'GET' \
+  'https://qrc-gen-api.onrender.com/generate?data=TESTING%20QRCODE%20GENERATION' \
+  -H 'accept: application/json'
 ```
+
+
+2. **Endpoint:** DELETE `/delete`
+
+```bash
+curl -X 'DELETE' \
+  'https://qrc-gen-api.onrender.com/delete' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "file_url": "https://cdn.uploadfly.cloud/fhRp8N/QRAPI-3115Codeimg.png"
+}'
+```
+
 
 ## Responses
 
-Explain the format of the responses returned by your API. Include example responses for each endpoint.
+The format of the responses returned by the API. Including example responses for each endpoint.
 
 ### Response Format
 
-Describe the structure of a typical API response. Include any standard fields and their meanings.
+The structure of a typical API response.
 
 ```json
 {
@@ -72,57 +98,91 @@ Describe the structure of a typical API response. Include any standard fields an
 
 ### Example Response
 
-Provide an example response for one of your endpoints.
+**Endpoint:** POST `/generate?data=<message>`
+- **Response:**
 
 ```json
 {
-  "message": "Success",
+  "success": true,
+  "status": 201,
   "data": {
-    "field1": "value1",
-    "field2": "value2"
+    "url": "https://cdn.uploadfly.cloud/fhRp8N/QRAPI-7080Codeimg.png",
+    "path": "fhRp8N/QRAPI-7080Codeimg.png",
+    "type": "text/plain",
+    "size": "2.41 kB",
+    "name": "QRAPI-7080Codeimg.png"
   }
 }
 ```
 
+
+**Endpoint:** DELETE `/delete`
+- **Response:**
+
+```json
+{
+  "success": true,
+  "status": 200,
+  "data": {
+    "message": "File deleted successfully"
+  }
+}
+```
 ## Errors
 
 Explain the possible error responses and their meanings. Include error codes and messages.
 
 ### Error Format
 
-Describe the structure of an error response.
+When calling the delete url and you miss to add the file url then this error response shows
 
 ```json
 {
-  "error": {
-    "code": 400,
-    "message": "Bad Request",
-    "details": "Description of the error"
-  }
+  "success": false,
+  "status": 400,
+  "error": "File URL is missing in request"
 }
 ```
 
 ### Example Error
 
-Provide an example error response.
+When calling the delete endpoint and the file url provided is invalid this response shows
 
 ```json
 {
-  "error": {
-    "code": 404,
-    "message": "Not Found",
-    "details": "The requested resource was not found."
-  }
+  "success": false,
+  "status": 404,
+  "error": "File not found"
 }
 ```
 
 ## Contributing
 
-Explain how others can contribute to your project, including guidelines for code contributions, bug reporting, and feature requests.
+Coming Soon
 
 ## License
 
 Specify the license under which your API is distributed.
 ```
+Loading...
+```
 
-You can customize and expand upon this template to suit the specific details of your API. Include relevant information, code examples, and details about your API's functionality to make it as user-friendly as possible.
+## Creator
+
+- **Name:** Jamin Onuegbu
+- **Email:** jaminonuegbu@gmail.com
+- **GitHub:** [JaminCO](https://github.com/JaminCO)
+- **LinkedIn:** [Jamin Onuegbu](https://www.linkedin.com/in/jamin-onuegbu-4aa851206/)
+- **Twitter:** [@jaminonuegbu](https://twitter.com/jaminonuegbu)
+
+Feel free to reach out if you have any questions or feedback about this project. You can also connect with me on social media for updates and discussions.
+
+---
+<!-- <p align="center">
+  Created by [Your Name](https://www.yourwebsite.com/)
+
+  [![Twitter](https://img.shields.io/twitter/follow/yourtwitter?label=Follow&style=social)](https://twitter.com/yourtwitter)
+  [![GitHub](https://img.shields.io/github/followers/yourgithub?label=Follow&style=social)](https://github.com/yourgithub)
+  [![LinkedIn](https://img.shields.io/badge/Connect-blue?style=flat&logo=linkedin&labelColor=blue)](https://www.linkedin.com/in/yourlinkedin)
+
+</p> -->
