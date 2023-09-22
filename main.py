@@ -1,5 +1,5 @@
 ﻿# Import Modules
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import qrcode
 import random
@@ -107,9 +107,11 @@ def create(name, data):
     img.save(image_name + '.png')
 
 # Get message/url and generate code
-@app.get("/generate")
+@app.get("/generate", status_code=201)
 async def generate(data: str = "TESTING QRCODE GENERATION"):
     msg = data
+    if msg == None:
+        raise HTTPException(status_code=400, detail="Missing parameter 'data', BAD REQUEST")
     print(msg)
     print(type(msg))
     name = gen_name()
@@ -125,8 +127,10 @@ async def generate(data: str = "TESTING QRCODE GENERATION"):
 
     return res.json()
 
-@app.delete("/delete")
+@app.delete("/delete", status_code=200)
 async def delete(delcode: DELCODE):
+    if delcode.file_url == None:
+        raise HTTPException(status_code=400, detail="Missing parameter 'file_url', BAD REQUEST")
     res = delete_file(delcode.file_url)
     return res.json()
 
