@@ -23,7 +23,7 @@ pydantic-settings==2.0.3
 pydantic_core==2.4.0
 pymongo==4.5.0
 pypng==0.20220715.0
-PyQRCode==1.2.1
+PyQRCode
 python-dotenv==1.0.0
 python-multipart==0.0.6
 PyYAML==6.0.1
