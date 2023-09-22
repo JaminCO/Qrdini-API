@@ -1,5 +1,4 @@
 
-```markdown
 # JQuickR
 
 A brief description of your API.
