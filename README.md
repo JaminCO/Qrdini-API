@@ -1,6 +1,8 @@
 # JQuickR API
 QR Code Generation API.
 
+**URL :** (https://qrc-gen-api.onrender.com/)
+
 ## Table of Contents
 
 - [JQuickR API](#jquickr-api)
