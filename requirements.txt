@@ -22,8 +22,8 @@ pydantic-extra-types==2.0.0
 pydantic-settings==2.0.3
 pydantic_core==2.4.0
 pymongo==4.5.0
-pypng==0.20220715.0
-python-dotenv==1.0.0
+pypng
+python-dotenv
 python-multipart==0.0.6
 PyYAML==6.0.1
 qrcode==7.4.2
