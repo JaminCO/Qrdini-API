@@ -100,7 +100,7 @@ The structure of a typical API response.
 
 ### Example Response
 
-**Endpoint:** POST `/generate?data=<message>`
+**Endpoint:** GET `/generate?data=<message>`
 - **Response:**
 
 ```json
