@@ -108,9 +108,9 @@ def create(name, data):
 
 # Get message/url and generate code
 @app.get("/generate", status_code=201)
-async def generate(data: str = "TESTING QRCODE GENERATION"):
-    msg = data
-    if msg == None:
+async def generate(data: str):
+    msg = dat
+    if msg == None or msg == " ":
         raise HTTPException(status_code=400, detail="Missing parameter 'data', BAD REQUEST")
     print(msg)
     print(type(msg))
