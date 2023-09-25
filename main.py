@@ -1,6 +1,7 @@
 ﻿# Import Modules
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
+from api_analytics.fastapi import Analytics
 import qrcode
 import random
 from pydantic import BaseModel
@@ -8,8 +9,8 @@ from typing import Optional
 import requests
 from dotenv import load_dotenv
 import os
-import pymongo
-import json
+# import pymongo
+# import json
 
 # Connect to MongoDB
 # client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -32,7 +33,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+app.add_middleware(Analytics, api_key=os.getenv("ANALYTICS_KEY"))
 
 
 # Delete the image from the cloud
@@ -61,7 +62,7 @@ def upload_file(filename):
     r = requests.post(url, headers=headers, files=body)
     return r
 
-app = FastAPI()
+# app = FastAPI()
 
 @app.get("/")
 async def home():
@@ -107,17 +108,15 @@ def create(name, data):
     img.save(image_name + '.png')
 
 # Get message/url and generate code
-@app.get("/generate", status_code=201)
-async def generate(data: str):
-    msg = dat
+@app.post('/generate')
+def generate_qrcode(data: str = Body(embed=True)):
+    msg = data
     if msg == None or msg == " ":
         raise HTTPException(status_code=400, detail="Missing parameter 'data', BAD REQUEST")
-    print(msg)
-    print(type(msg))
     name = gen_name()
     create(name, msg)
     res = upload_file(name+".png")
-    
+
     # code = {"name":res.json()["data"]["name"], "file_url":res.json()["data"]["url"]}
     # # Add courses to collection
     # x = collection.insert_one(code)

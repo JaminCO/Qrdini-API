@@ -12,7 +12,9 @@ QR Code Generation API.
   - [Usage](#usage)
     - [Authentication](#authentication)
     - [Endpoints](#endpoints)
-    - [Examples](#examples)
+    - [Request Body](#request-body)
+      - [Request body:](#request-body-1)
+      - [Request body:](#request-body-2)
   - [Responses](#responses)
     - [Response Format](#response-format)
     - [Example Response](#example-response)
@@ -27,7 +29,7 @@ QR Code Generation API.
 
 JQuickR QR Code Generation API is a versatile solution tailored for the swift and effortless creation of QR codes. 
 
-This API features a user-centric endpoint through which consumers can effortlessly produce QR codes. Users provide their desired message via query parameters, and the API generates a QR code image, securely storing it on a cloud service provider. 
+This API features a user-centric endpoint through which consumers can effortlessly produce QR codes. Users provide their desired message via request body, and the API generates a QR code image, securely storing it on a cloud service provider. 
 
 Subsequently, it delivers a URL enabling users to access and disseminate the generated QR code image.
 
@@ -53,22 +55,33 @@ How to use API, Including Authentication(if any), How to call the endpoints and 
 
 Available endpoints in the API, including their input parameters and expected output.
 
-- GET `/generate?data=<message>`: Generates Qrcode and returns a json containing url to the image
+- POST `/generate`: Generates Qrcode and returns a json containing url to the image
 
 - DELETE `/delete`: Delete Qrcode, after passing the url o the image in the request body, it returns a response on the status
 
-### Examples
+### Request Body
 
-Provide usage examples for your API, including code snippets.
+This contains usage examples for the API including examples and request body
 
-1.  **Endpoint:** GET `/generate?data=<message>`
+1.  **Endpoint:** POST `/generate`
 
 ```BASH
-curl -X 'GET' \
-  'https://qrc-gen-api.onrender.com/generate?data=TESTING%20QRCODE%20GENERATION' \
-  -H 'accept: application/json'
+curl -X 'POST' \
+  'https://qrc-gen-api.onrender.com/generate' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "data": "string"
+}'
 ```
 
+#### Request body:
+```json
+{
+  "data":"user message"
+}
+```
+---
 
 2. **Endpoint:** DELETE `/delete`
 
@@ -80,6 +93,12 @@ curl -X 'DELETE' \
   -d '{
   "file_url": "https://cdn.uploadfly.cloud/fhRp8N/QRAPI-3115Codeimg.png"
 }'
+```
+#### Request body:
+```json
+{
+  "file_url":"<image_url>"
+}
 ```
 
 
@@ -100,7 +119,7 @@ The structure of a typical API response.
 
 ### Example Response
 
-**Endpoint:** GET `/generate?data=<message>`
+**Endpoint:** POST `/generate`
 - **Response:**
 
 ```json
