@@ -68,6 +68,10 @@ def upload_file(filename):
 async def home():
     return {"message": "Hello World"}
 
+@app.head("/")
+async def home2():
+    return {"message": "Hello World"}
+
 # Generate name:
 def gen_name():
     name = "QRAPI-"+str(random.randint(1172, 9728))+"Codeimg"
