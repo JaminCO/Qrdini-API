@@ -56,10 +56,19 @@ def upload_file(filename):
     headers = {
       'Authorization':  os.getenv("API_KEY_UPLOAD"),
     }
+
     body = {
-      'file': open(filename, 'rb'),
+      'file': (
+        filename,
+        open(filename, 'rb'),
+        'image/png',
+        {'Expires': '0'}
+    ),
     }
     r = requests.post(url, headers=headers, files=body)
+
+    print(r.status_code)
+    print(r.text)
     return r
 
 # app = FastAPI()
@@ -119,7 +128,8 @@ def generate_qrcode(data: str = Body(embed=True)):
         raise HTTPException(status_code=400, detail="Missing parameter 'data', BAD REQUEST")
     name = gen_name()
     create(name, msg)
-    res = upload_file(name+".png")
+    n_name = f"{name}.png"
+    res = upload_file(n_name)
 
     # code = {"name":res.json()["data"]["name"], "file_url":res.json()["data"]["url"]}
     # # Add courses to collection
