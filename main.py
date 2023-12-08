@@ -1,7 +1,7 @@
 ﻿# Import Modules
 from fastapi import FastAPI, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
-from api_analytics.fastapi import Analytics
+# from api_analytics.fastapi import Analytics
 import qrcode
 import random
 from pydantic import BaseModel
@@ -33,7 +33,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.add_middleware(Analytics, api_key=os.getenv("ANALYTICS_KEY"))
+# app.add_middleware(Analytics, api_key=os.getenv("ANALYTICS_KEY"))
 
 
 # Delete the image from the cloud
