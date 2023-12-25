@@ -191,7 +191,7 @@ Loading...
 ## Creator
 
 - **Name:** Jamin Onuegbu
-- **Email:** jaminonuegbu@gmail.com
+- **Email:** pydevog@gmail.com
 - **GitHub:** [JaminCO](https://github.com/JaminCO)
 - **LinkedIn:** [Jamin Onuegbu](https://www.linkedin.com/in/jamin-onuegbu-4aa851206/)
 - **Twitter:** [@jaminonuegbu](https://twitter.com/jaminonuegbu)
