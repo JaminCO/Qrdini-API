@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const inputData = document.getElementById('inputData').value;
 
         // Define your API URL
-        const apiUrl = 'http://127.0.0.1:8000/generate'; // Replace with your actual API URL
+        const apiUrl = 'https://qrc-gen-api.onrender.com/generate'; // Replace with your actual API URL
 
         // Use the fetch API to send a POST request to the API
         fetch(apiUrl, {
