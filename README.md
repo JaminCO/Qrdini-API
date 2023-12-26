@@ -1,4 +1,4 @@
-# JQuickR API
+# Qrdini API
 QR Code Generation API.
 
 **API BASE URL :** [https://qrc-gen-api.onrender.com/](https://qrc-gen-api.onrender.com/)
