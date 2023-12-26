@@ -1,11 +1,11 @@
 # JQuickR API
 QR Code Generation API.
 
-**API URL :** (https://qrc-gen-api.onrender.com/)
+**API BASE URL :** [https://qrc-gen-api.onrender.com/](https://qrc-gen-api.onrender.com/)
 
 ## Table of Contents
 
-- [JQuickR API](#jquickr-api)
+- [Qrdini](#qrdini-api)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Features](#features)
@@ -27,7 +27,7 @@ QR Code Generation API.
 
 ## Introduction
 
-JQuickR QR Code Generation API is a versatile solution tailored for the swift and effortless creation of QR codes. 
+Qrdini QR Code Generation API is a versatile solution tailored for the swift and effortless creation of QR codes. 
 
 This API features a user-centric endpoint through which consumers can effortlessly produce QR codes. Users provide their desired message via request body, and the API generates a QR code image, securely storing it on a cloud service provider. 
 
